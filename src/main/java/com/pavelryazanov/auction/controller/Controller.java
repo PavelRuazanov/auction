@@ -25,8 +25,7 @@ public class Controller extends HttpServlet {
         try {
             page = command.execute(request);
         } catch (CommandException e) {
-//            response.sendError(500);
-            throw new ServletException(e);
+            response.sendError(500);
         }
         String logString = request.getParameter("log");
         String pasString = request.getParameter("pas");

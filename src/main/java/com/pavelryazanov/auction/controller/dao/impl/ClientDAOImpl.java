@@ -13,7 +13,7 @@ import java.util.Properties;
 public class ClientDAOImpl implements BaseDAO<Client>, ClientDAO {
 
 
-    private static final String SELECT_LOGIN_PASSWORD = "SELEC clients_password FROM clients WHERE clients_login = ?";
+    private static final String SELECT_LOGIN_PASSWORD = "SELECT clients_password FROM clients WHERE clients_login = ?";
     private static ClientDAOImpl instance = new ClientDAOImpl();
 
     private ClientDAOImpl() {

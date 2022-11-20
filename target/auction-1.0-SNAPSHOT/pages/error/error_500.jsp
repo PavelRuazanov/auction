@@ -15,7 +15,7 @@ Request from: ${pageContext.errorData.requestURI} is failed <br/>
 Servlet name: ${pageContext.errorData.servletName} is failed <br/>
 Status code: ${pageContext.errorData.statusCode} is failed <br/>
 Exception: ${pageContext.exception}<br/>
-Exception: ${pageContext.exception.message}<br/>
+Exception message: ${pageContext.exception.message}<br/>
 <br/><br/><br/>
 Massage from exception: ${error_msg}
 </body>

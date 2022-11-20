@@ -14,5 +14,10 @@
 <h1>"Main page"
 </h1>
 Hello ${client}
+<br/>
+<form action="controller">
+    <input type="hidden" name="command" value="logout"/>
+    <input type="submit" name="logout" value="logout"/>
+</form>
 </body>
 </html>

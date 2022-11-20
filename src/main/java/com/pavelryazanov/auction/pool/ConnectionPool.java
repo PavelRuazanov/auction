@@ -13,7 +13,7 @@ public class ConnectionPool {
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver());
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new ExceptionInInitializerError(e);
         }
 
     }
@@ -34,7 +34,7 @@ public class ConnectionPool {
             try {
                 connection = DriverManager.getConnection(URL, prop);
             } catch (SQLException e) {
-                e.printStackTrace();
+                throw new ExceptionInInitializerError(e);
             }
             free.add(connection);
 
@@ -54,24 +54,29 @@ public class ConnectionPool {
             connection = free.take();
             used.put(connection);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            // log
+            Thread.currentThread().interrupt();
         }
         return connection;
     }
-    public void releaseConnection(Connection connection){
+
+    public void releaseConnection(Connection connection) {
         try {
             used.remove(connection);
             free.put(connection);
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            // log
+            Thread.currentThread().interrupt();
         }
     }
-    public void destroyPool(){
+
+    // deregisterDriver
+    public void destroyPool() {
         for (int i = 0; i < CAPACITY; i++) {
             try {
                 free.take().close();
             } catch (SQLException | InterruptedException e) {
-                throw new RuntimeException(e);
+                //log.e.printStackTrace();
             }
         }
     }
